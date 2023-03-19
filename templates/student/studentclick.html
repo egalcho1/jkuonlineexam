@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <style media="screen">
+    .jumbotron {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    .jumbotron h1 {
+      text-align: center;
+    }
+    body{
+     
+      background: -webkit-linear-gradient(top left,black,darkgray);
+      background: -linear-gradient(top left,black,darkgray);
+      background: -o-linear-gradient(top left,black,darkgray);
+      height: 100%;
+    
+  }.jumbotron{
+   
+    background: -webkit-linear-gradient(top left,black,darkgray);
+    background: -linear-gradient(top left,black,darkgray);
+    background: -o-linear-gradient(top left,black,darkgray);
+    height: 100%;
+   
+    
+  }
+  </style>
+
+</head>
+
+<body>
+
+  {% include "exam/navbar.html" %}
+  <br><br>
+  <center>
+  <div class="jumbotron" style="margin-bottom:0px;">
+    <h1 class="display-4 text-white">Hello Student,</h1>
+    <p class="lead text-white">and Welcome to Online Examination System</p>
+    <hr class="my-4 text-white">
+    <p class="text-white">click on login now button to login to system</p>
+    <p class="lead text-white">
+      
+      <a class="btn btn-primary rounded-0" href="studentlogin" role="button">Login Now</a>
+    </p>
+    <br><br><br><br><br><br>
+  </div></center>
+
+</body>
+
+</html>

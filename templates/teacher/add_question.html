@@ -1,0 +1,416 @@
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{%load static%}
+{% block content %}
+<html>
+    <style>
+        ul .li{
+            padding-left: 20px;
+            font-size: 30px;
+            color: white;
+        
+          } body{
+               
+                background: -webkit-linear-gradient(top left,black,darkgray);
+                background: -linear-gradient(top left,black,darkgray);
+                background: -o-linear-gradient(top left,black,darkgray);
+                height: 100%;
+              
+            }#qz{
+              border: 3px solid white;
+                background: -webkit-linear-gradient(top left,black,darkgray);
+                background: -linear-gradient(top left,black,darkgray);
+                background: -o-linear-gradient(top left,black,darkgray);
+                height: 100%;
+                
+            }#cont{
+               background: -webkit-linear-gradient(top left,black,darkgray);
+                background: -linear-gradient(top left,black,darkgray);
+                background: -o-linear-gradient(top left,black,darkgray);
+            }#rpo{
+               border: 3px solid white;
+                background: -webkit-linear-gradient(top left,black,darkgray);
+                background: -linear-gradient(top left,black,darkgray);
+                background: -o-linear-gradient(top left,black,darkgray);
+                height: 100%;
+            }
+            input[type=text],
+            input[type=password] {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+            
+            /* Set a style for all buttons */
+            
+            .button {
+                background-color: #48d1cc;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+            }
+            
+            
+            .cancelbtn {
+                width: auto;
+                padding: 10px 18px;
+                background-color: #4682b4;
+            }
+            
+            /* Center the image and position
+            the close button */
+            
+            .imgcontainer {
+                text-align: center;
+                margin: 24px 0 12px 0;
+                position: relative;
+            }
+            
+            img.avatar {
+                width: 40%;
+                border-radius: 50%;
+            }
+            
+            .container {
+                padding: 16px;
+            }
+            
+            span.psw {
+                float: right;
+                padding-top: 16px;
+            }
+            
+            /* The Modal (background) */
+            
+            .modal {
+               display: none;
+               position: fixed;
+               z-index: 1;
+               left: 0;
+               top: 0;
+               width: 100%;
+               height: 100%;
+               overflow: auto;
+               background-color: rgb(0,0,0);
+               background-color: rgba(0,0,0,0.4);
+               padding-top: 60px;
+            }
+            
+            
+            .modal-content {
+                background-color: #fefefe;
+                margin: 5% auto 15% auto;
+                border: 1px solid #888;
+                width: 80%;
+            }
+            
+            /* The Close Button (x) */
+            
+            .close {
+                position: absolute;
+                right: 25px;
+                top: 0;
+                color: #000;
+                font-size: 35px;
+                font-weight: bold;
+            }
+            
+            .close:hover,
+            .close:focus {
+                color: red;
+                cursor: pointer;
+            }
+            
+            /* Add Zoom Animation */ 
+            
+            .animate {
+             -webkit-animation: animatezoom 0.6s;
+             animation: animatezoom 0.6s
+            }
+            
+            @-webkit-keyframes animatezoom {
+             from {-webkit-transform: scale(0)}
+             to {-webkit-transform: scale(1)}
+            }
+            
+            @keyframes animatezoom {
+                from {transform: scale(0)}
+                to {transform: scale(1)}
+            }
+            
+            /* Change styles for span and cancel
+            button on extra small screens */ 
+            
+            @media screen and(max-width: 300px){
+                span.psw {
+                   display: block;
+                   float: none;
+                }
+                .cancelbtn {
+                   width: 100%;
+                }
+            }
+    </style>
+
+    <body>
+        <div id="id03" class="modal container-sm shadow" style="width: 500px;">
+
+            <form class="modal-content animate" action="" id="form" name="my-form1" >
+          <div class="imgcontainer">
+          <span onclick="document.getElementById('id03').style.display='none'"class="close" title="Close Modal"> &times;</span>
+          
+          
+              </div>
+          
+          
+            
+              <div style="padding:20px">
+              <h1>register stundets of departiment </h1>
+              <input type="hidden" name="id" id="ida" value="">
+              <label class="form-label">enter student id</label>
+               <input type="text" name="option1" id="sid" class="form-control">
+              <label class="form-label">first name</label>
+              <input type="text" name="option1" id="fname" class="form-control">
+                     <label class="form-label">last name</label>
+              <input type="text" name="option2" id="lname" class="form-control">
+              
+              <label class="form-label">year like 2 for second year 4 for fourth year etc</label>
+              <input type="text" name="option1" id="year" class="form-control">
+             
+              <button class="btn btn-success" onclick="writeUser()">register</button>
+            </div>
+            </form>
+          </div></center>
+          
+          
+          
+          
+              <center>
+              <div class="container-sm  shadow-lg" style="width:100%;" id="cont">
+                <ul class="container-sm shadow bg-info" style="list-style-type: none;display: flex;">
+                  <li class="btn li"><a href="online.html">home</a></li>
+                 
+                  <li class="btn li" id="qts">question</li>
+                
+                  
+                </ul>
+              
+          <center>
+          <div id="id02" class="modal container-sm shadow" style="width: 720px;">
+          
+            <form class="modal-content animate" action="{%url 'teacher:teacher-add-question'%}" id="form" name="my-form1" method="post" >
+          {%csrf_token%}
+                <div class="imgcontainer">
+          <span onclick="document.getElementById('id02').style.display='none'"class="close" title="Close Modal"> &times;</span>
+          
+          
+              </div>
+          
+          
+            <h1 class="btn btn-warning">create your question bellow </h1>
+               <div style="padding:20px;border:10px solid cyan">
+              <input type="hidden" name="id" id="idb" value="{{username}}">
+              
+              <input type="hidden" name="course" id="idb" value="{{course}}">
+              <label class="form-label">question weight</label>
+              <input type="text" name="mark" id="mark" class="form-control" placeholder="example:2">
+             
+                
+              <label class="form-label">write your question bellow</label>
+              <textarea class="form-control" rows="4" id="question" name="question" placeholder="example:where is jinka university"></textarea>
+              <label class="form-label">enter choose A</label>
+              <input type="text" name="option1" id="option1" class="form-control" placeholder="ethiopia">
+                     <label class="form-label">enter choose B</label>
+              <input type="text" name="option2" id="option2" class="form-control" placeholder="kenya">
+              <label class="form-label">enter choose c</label>
+              <input type="text" name="option3" id="option3" class="form-control" placeholder="sudan">
+              <label class="form-label">enter choose d</label>
+              <input type="text" name="option4" id="option4" class="form-control" placeholder="england">
+              <label class="form-label">select answer</label>
+              <select name="answer" class="form-control">
+                <option value="option1">A</option>
+                <option value="option2">B</option>
+                <option value="option3">C</option>
+                <option value="option4">D</option>
+              </select>
+              
+              <button class="btn btn-success" type="submit">save</button></div>
+            </form>
+          </div></center>
+          
+            <div class="container-sm bg-white" style="width:50%;display: none;margin: 2%;" id="st">
+             
+            </div>
+          <div class="container-sm" style="width:90%; min-height: 720px;" id="qz">
+            <button class="btn btn-warning">welcome</button>
+            
+            <span onclick="window.print()" class="btn btn-danger" style="float: right;">print</span>
+            <span onclick="document.getElementById('id02').style.display='block'" class="btn btn-success" style="float: right;">add new</span>
+           <div id="mainBody" style="width: 100%;top: 0;background: white;padding: 2%;" >
+            <h2 style="text-align: center;color:black;" class="bg-info">Course: {{course_name}}</h2>
+          <div id="qt"  style="min-height:480px;max-height: 500px;" class=" table table-responsive">
+          <!--<table class="" id="quiz" style="min-height:480px;max-height: 500px;padding:3%">-->
+           
+                
+    
+                        {% csrf_token %}
+                        
+                        <div class="jumbotron1 " style="min-height:600px;max-height:600px;width:100%">
+                        {% for q in questions%}
+                        <div class="d-flex w-100 align-items-center">
+                            <div class="col-auto flex-shrink-1 ">
+                                <h3 class="" style="margin-left:0">{{ forloop.counter }}. {{q.question}}</h3>
+                            </div>
+                            <div class="col-auto">
+                              <h4 class="" style="margin-left:0"> {{q.marks}} [marks]</h4>
+                          </div>
+                           
+                            <div class="col-auto">
+                              <a href="{%url 'teacher:qtdelete' q.id %}" style="text-align: right;">delete</a>
+                          </div>
+                        </div>
+                        <input type="hidden" name="csrfmiddlewaretoken" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
+                
+                
+                        <div class="form-check mx-4 d-flex align-items-center">
+                            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option1}}" value="Option1">
+                            <label class="form-check-label ml-3" for="option1">
+                             A {{q.option1}}
+                            </label>
+                        </div>
+                
+                
+                        <div class="form-check mx-4 d-flex align-items-center">
+                            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option2}}" value="Option2">
+                            <label class="form-check-label ml-3" for="option2">
+                             B {{q.option2}}
+                            </label>
+                        </div>
+                
+                
+                        <div class="form-check mx-4 d-flex align-items-center">
+                            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option3}}" value="Option3">
+                            <label class="form-check-label ml-3" for="option3">
+                              C {{q.option3}}
+                            </label>
+                        </div>
+                
+                
+                        <div class="form-check mx-4 d-flex align-items-center">
+                            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option4}}" value="Option4">
+                            <label class="form-check-label ml-3" for="option4">
+                             D {{q.option4}}
+                            </label>
+                        </div>
+                    
+                        {% endfor %}
+                    </div>
+                    
+             
+          </table>
+          </div>
+           </b><span id="results" style="display:none"></span>
+          
+          
+          <button  style="float: right;margin-right: 20px;" class="btn btn-danger" onclick="rest()">clear</button>
+              </div>
+            </div>
+            <!--=========================================student list========================-->
+            <div class="container-sm" style="width:90%; min-height: 720px;display: none;" id="stud" >
+            <span onclick="document.getElementById('id03').style.display='block'" class="btn btn-success" style="float: right;">add new</span>
+           <div id="mainBody" style="width: 100%;top: 0;background: white;padding: 2%;" >
+                    
+          <div id="stud">
+          <table class="table table-responsive table-striped table-hover " id="stud" style="backgroud:darkgray;min-height:480px;max-height: 500px;padding:3%">
+            
+            <th  class="bg-info">No</th>
+            <th  class="bg-info">full name</th>
+            <th  class="bg-info">total mark</th>
+           
+            <tbody class="bg-white">
+            
+            </tbody>
+          </table>
+          </div></div></div>
+          <!--======================================set time===================-->
+          <div class="container-sm tim" style="width:70%;border:2px solid white;padding: 20px;display: none;border-radius:30px">
+            <form class="modal-content animate" action="" id="form" name="my-form1" method="post" >
+           {%csrf_token%}
+            <span class="btn btn-info">schedule page</span><br>
+            <label class="form-label ">set time</label>
+            <input type="time" id="time" name="time" class="form-control">
+            <label class="form-label">set date</label>
+          <input type="date" id="date" name="date" class="form-control">
+          <label class="form-label ">duration in minute ,eg if two hour 120 </label>
+          <input type="number" id="dr" name="dr" class="form-control" placeholder="example:120 for 2 hour">
+          
+          <button onclick="dat()" class="btn btn-success">save</button>
+            </form>
+          </div>
+          <!--=====================================report page=================-->
+          <div class="container-sm" id="rpo" style="display: none;">
+            <span class="text-white">the student mark report page<span style="float: right;" class="btn btn-info" onclick="window.print()">print</span>
+            <table class="table table-responsive bg-white" id="tbl" style="min-height:620px;max-height:620px">
+              <th class="bg-info">NO</th>
+             
+              <th class="bg-info">Full Fname</th>
+              
+              <th class="bg-info">Mark</th>
+              <tbody>
+                {%for n in exam %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{n.student_id}}</td>
+                  <td>{{n.marks}}</td>
+                  
+                  <tr>
+                {%endfor%}
+              </tbody>
+            </table>
+            
+          </div>
+          
+          </div>
+          <script type="text/javascript">
+            /*var tm=document.querySelector('.tim');
+            
+            var qz=document.querySelector('#qz');
+            var qts=document.querySelector('#qts');
+            var st=document.querySelector('#stud');
+            
+            var tim=document.querySelector('#tm');
+            var rp=document.querySelector('#rp');
+            var rpo=document.querySelector('#rpo');
+           
+            qts.addEventListener('click',()=>{
+            
+            qz.style.display="block"
+            st.style.display="none"
+            tm.style.display="none"
+            rpo.style.display="none"
+            })
+            
+            tim.addEventListener('click',()=>{
+            //qt.style.display="none"
+            qz.style.display="none"
+            st.style.display="none"
+            tm.style.display="block"
+            rpo.style.display="none"
+            })
+            rp.addEventListener('click',()=>{
+            //qt.style.display="none"
+            qz.style.display="none"
+            st.style.display="none"
+            tm.style.display="none"
+            rpo.style.display="block"
+            })*/
+        </script>
+    </body>
+</html>
+{%endblock content %}

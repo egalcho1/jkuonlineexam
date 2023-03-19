@@ -1,0 +1,318 @@
+{% load static %}
+<html lang="en">
+
+<head>
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+    </head>
+    <link rel="stylesheet" href="{%static 'cssb/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{%static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/details.css' %}">
+    <link rel="stylesheet" href="{% static 'css/body.css' %}">
+    <script type="text/javascript" src="{%static 'jqu/jquery.min.js' %}"></script>
+
+
+
+
+
+
+    <title>face recognition</title>
+</head>
+<style>
+
+</style>
+
+
+<body>
+    <div class="sidebar">
+        <div class="p-4">
+            <a href="" class="logo"><img
+                    src="https://scontent.fadd1-1.fna.fbcdn.net/v/t1.6435-9/194392928_368840524633089_7831724522626651832_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=973b4a&_nc_ohc=c9s3kg8o4NQAX-QkX9T&_nc_ht=scontent.fadd1-1.fna&oh=00_AfBU9efx26mxuUSNWvZffTOCOWWtd9V8ZbPyG4jfUnq3Eg&oe=63D0B43F"
+                    style="width:30px;height:30px;border-radius:20px"> &nbsp;&nbsp;<b>jkuems</b></a>
+
+            <a class="active bi bi-house" href="#home"> &nbsp;&nbsp;Home</a>
+            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                <span class="ms-1 d-none d-sm-inline   bi bi-border-all active"> &nbsp;&nbsp;Dashboard</span> </a>
+            <a href="#news" class="bi bi-newspaper"> &nbsp;&nbsp;News</a>
+            <a href="#"><span class="bi bi-send"> &nbsp;&nbsp;Contacts</span> </a>
+            <a href="#about" class="bi bi-info-circle-fill"> &nbsp;&nbsp;About</a>
+            <div class="dropdown">
+                <button class="dropbtn">service &nbsp;&nbsp;<i class="bi bi-caret-down-fill"></i></button>
+                <div class="dropdown-content">
+                    {%if sup == True %}
+
+                    <a href="{%url 'core:profiles' %}" class="nav-link px-0 bi bi-people-fill"> &nbsp;&nbsp;manage
+                        employee</a>
+
+
+                    <a href="{%url 'emp:salary'%}" class="nav-link px-0 bi bi-currency-dollar"> &nbsp;&nbsp; manage
+                        salary</a>
+
+                    <a href="{%url 'emp:users'%}" class="nav-link px-0 bi bi-person-circle"> &nbsp;&nbsp;manage
+                        users</a>
+
+                    <a href="{%url 'core:index'%}" class="nav-link px-0 bi bi-airplane-engines">&nbsp;&nbsp;manage
+                        leave</a>
+
+                    <a href="{%url 'emp:atr'%}" class="nav-link px-0 bi bi-calendar-day"> &nbsp;&nbsp;attendance
+                        report</a>
+
+                    {%elif type == "employer" %}
+
+
+                    <a href="{%url 'core:index'%}" class="nav-link px-0 bi bi-calendar-week-fill">&nbsp;&nbsp;check
+                        attendance</a>
+
+                    <a href="{%url 'core:index'%}" class="nav-link px-0 bi bi-currency-dollar"> &nbsp;&nbsp;check
+                        salary</a>
+
+                    {%elif type == "users" %}
+
+                    <a href="#" class="nav-link px-0 align-middle bi bi-question-circle-fill">
+                        &nbsp;&nbsp;request</a>
+
+                    <a href="#submenu2" data-bs-toggle="collapse"
+                        class="nav-link px-0 align-middle bi bi-calendar-check">
+                        task
+                        status</a>
+
+                    <a href="#" class="nav-link px-0"> task
+                        report </a>
+
+
+
+
+
+
+
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="content">
+        <div class="conatainer-sm " style="top:0;margin-left: 50px;">
+            <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-white p-4">
+                    <ul class="ul">
+                        <li><a href="#"></a></li>
+                        <li><a href="#" class="home">home</a></li>
+                        {%if sup == True or type == "admin" or type == "employer" %}
+
+                        <li> <a href="{%url 'emp:register' %}" class="">register</a></li>
+
+                        <li> <a href="{%url 'core:profiles' %}" class="">employes</a></li>
+                        {%endif%}
+                        <li> <a href="#" class="">contanct</a></li>
+
+                        <li> <a href="#" class="">service</a></li>
+                        <li> <a href="#" class="">privace</a></li>
+
+                        <li> <a href="#" class="">about</a></li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <nav class="navbar navbar-dark "
+                style="background-color: #2390d3;width: 99%; margin-left: 35px;margin-right: 20px;">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+
+
+                    </button>
+                    <span class="h1 text-white">WELCOME JINKA UNIVERSITY EMS HOME PAGE
+                    </span>
+                    <span class="text-white" style="float:right ;">{{nm}}&nbsp;&nbsp; &nbsp;<img
+                            src="{%static 'pic/p.jpg'%}" style="width:50px;height:50px;border-radius:50%" /></span>
+                </div>
+            </nav>
+            ..
+        </div>
+        <script>
+            (function ($) {
+
+                "use strict";
+
+                var fullHeight = function () {
+
+                    $('.js-fullheight').css('height', $(window).height());
+                    $(window).resize(function () {
+                        $('.js-fullheight').css('height', $(window).height());
+                    });
+
+                };
+                fullHeight();
+
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
+                });
+
+            })(jQuery);
+
+        </script>
+
+        {% block content%}
+        {% endblock content %}
+
+
+
+        <style type="text/css">
+            .ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            /* Change the link color to #111 (black) on hover */
+            li a:hover {
+                background-color: #111;
+            }
+
+            .home {
+                background-color: #4CAF50;
+            }
+
+            .dropbtn {
+                background-color: #04AA6D;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+            }
+
+            /* The container <div> - needed to position the dropdown content */
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            /* Dropdown Content (Hidden by Default) */
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+            }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+            /* Show the dropdown menu on hover */
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            /* Change the background color of the dropdown button when the dropdown content is shown */
+            .dropdown:hover .dropbtn {
+                background-color: #3e8e41;
+            }
+
+            .sidebar {
+                margin: 0;
+                padding: 0;
+                width: 300px;
+                background-color: #f1f1f1;
+                position: fixed;
+                height: 100%;
+                overflow: auto;
+            }
+
+
+            .sidebar a {
+                display: block;
+                color: black;
+                padding: 16px;
+                text-decoration: none;
+            }
+
+
+            .sidebar a.active {
+                background-color: #04AA6D;
+                color: white;
+            }
+
+
+            .sidebar a:hover:not(.active) {
+                background-color: #555;
+                color: white;
+            }
+
+
+            div.content {
+                margin-left: 200px;
+                padding: 1px 16px;
+                height: 1000px;
+            }
+
+
+            @media screen and (max-width: 700px) {
+                .sidebar {
+                    width: 100%;
+                    height: auto;
+                    position: relative;
+                }
+
+                .sidebar a {
+                    float: left;
+                }
+
+                div.content {
+                    margin-left: 0;
+                }
+            }
+
+
+            @media screen and (max-width: 400px) {
+                .sidebar a {
+                    text-align: center;
+                    float: none;
+                }
+            }
+        </style>
+</body>
+
+</html>
+</body>
+
+</html>

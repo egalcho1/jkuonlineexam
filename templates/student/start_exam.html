@@ -1,0 +1,409 @@
+
+
+
+ {%load static%}
+
+
+<head>
+   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+
+<style>
+    body{
+       
+        background: -webkit-linear-gradient(top left,black,darkgray);
+        background: -linear-gradient(top left,black,darkgray);
+        background: -o-linear-gradient(top left,black,darkgray);
+       
+     
+       
+    }
+    .jumbotron1{
+       
+          border: 3px solid white;
+          background: white;
+          border-radius:20px;
+          
+  
+    }.jumbotron{
+        border: 3px solid white;
+        border-radius:20px;
+        background: -webkit-linear-gradient(top left,black,darkgray);
+        background: -linear-gradient(top left,black,darkgray);
+        background: -o-linear-gradient(top left,black,darkgray);
+     
+        margin:2%;
+    }
+    #videoCam {
+        width: 400px;
+        height: 400px;
+        margin-left: 0px;
+        border: 3px solid #ccc;
+        background: black;
+        border-radius:20px;
+     }
+</style>
+</head>
+
+<center>
+<div class="jumbotron row" >
+    <div class=" col-3" >
+        <span class="text-white">your status displayed below</span>
+        <br><br>
+              <span class="text-white">security camera</span>
+              <img src="{%url 'student:livestram' id%}" width="80%" style="border:3px solid cyan" id="videoCam">
+        
+        <center> <span class="text-white" style="" id="cheat"></span></center> 
+        </div>
+        <div class=" col-8" >
+            <div id="exam" style="display:none">
+    <form class="form" autocomplete="off" onsubmit="return saveAns()" action="/student/calculate-marks" method="POST">
+       
+        {% csrf_token %}
+        <h2 style="text-align: center;color:white">Course: {{course.course_name}}</h2>
+        <div class="jumbotron1 table table-responsive " style="min-height:600px;max-height:600px;">
+        {% for q in questions%}
+        <div class="d-flex w-100 align-items-center">
+            <div class="col-auto flex-shrink-1 ">
+                <h3 class="">{{ forloop.counter }}. {{q.question}}</h3>
+            </div>
+            <div class="col-auto">
+                <h4 style="text-align: right;">[{{q.marks}} Marks]</h4>
+            </div>
+        </div>
+        <input type="hidden" name="csrfmiddlewaretoken" value="C24rUotmdHawVQJL3KrqiWxvti8UffOFYUc8TRbZtLt36AVLdP3jbkzUVe3beRAa">
+
+
+        <div class="form-check mx-4 d-flex align-items-center">
+            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option1}}" value="Option1">
+            <label class="form-check-label ml-3" for="option1">
+              A {{q.option1}}
+            </label>
+        </div>
+
+
+        <div class="form-check mx-4 d-flex align-items-center">
+            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option2}}" value="Option2">
+            <label class="form-check-label ml-3" for="option2">
+              B {{q.option2}}
+            </label>
+        </div>
+
+
+        <div class="form-check mx-4 d-flex align-items-center">
+            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option3}}" value="Option3">
+            <label class="form-check-label ml-3" for="option3">
+              C {{q.option3}}
+            </label>
+        </div>
+
+
+        <div class="form-check mx-4 d-flex align-items-center">
+            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="{{q.option4}}" value="Option4">
+            <label class="form-check-label ml-3" for="option4">
+              D {{q.option4}}
+            </label>
+        </div>
+    
+        {% endfor %}
+    </div>
+        <input class="btn btn-primary btn-lg" style="border-radius: 0%;" type="submit" value="Submit Answers">
+    </form></div>
+    <div style="max-height:500px;min-height:500px;border:2px solid white" id="pro">
+        <span id="title" class="text-white"></span>
+        <span id="date" class="text-white"></span>
+        <span id="time" class="text-white"></span>
+        <br>
+        <span class="text-white">
+            remember when exam start don't try to do any thing, <br>
+            unless doing exam .<br>
+            if you try to do same thing you may be atomatical dismissed out.<br>
+             thing not to do after exam start.
+            <br>
+            1. it's forbidden to open any software even don't touch<br>
+            2. don't try to open new tab system outomatical dismissed you<br>
+            3. don't try to minimize your window
+        </span>
+    </div>
+</div>
+    <div class=" col-1" >
+        <span class="" id="tma" style="float:right;display:none;overflow-y:hidden;transition:0.8s;backgroud:#111;z-index:1">
+            <button class="btn btn-primary" style="font-size:30px">timer</button><br>
+            <div style="border:2px solid white;z-index: 13;box-shadow: 20px;padding: 5px; justify-items: center; background:red;height:50px; width:100px;border-radius: 10px;color: white;float: right">
+        <span id="hr"></span>
+        <span id="min"></span>
+        <span id="sec"></span>
+        </div>
+        
+              </span>
+            
+           
+    </div>
+    
+</div></center>
+<script src="{%static 'js/jquery-2.1.1.min.js'%}"></script>
+<script>
+var win=setInterval(function(){
+sessionStorage.setItem('window',window.outerWidth)
+},1000)
+setTimeout(function(){
+    clearInterval(win)
+    },1000)
+   
+    function saveAns() {
+
+        var ele = document.getElementsByTagName('input');
+        for (i = 0; i < ele.length; i++) {
+            if (ele[i].type = "radio") {
+                if (ele[i].checked) {
+                    setCookie(ele[i].name, ele[i].value, 3)
+                }
+            }
+        }
+
+    }
+
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+   
+
+   function openCam(){
+        let All_mediaDevices=navigator.mediaDevices
+        if (!All_mediaDevices || !All_mediaDevices.getUserMedia) {
+           console.log("getUserMedia() not supported.");
+           return;
+        }
+        All_mediaDevices.getUserMedia({
+           audio: true,
+           video: true
+        })
+        .then(function(vidStream) {
+           var video = document.getElementById('videoCam1');
+           if ("srcObject" in video) {
+              video.srcObject = vidStream;
+           } else {
+              video.src = window.URL.createObjectURL(vidStream);
+           }
+           video.onloadedmetadata = function(e) {
+              video.play();
+           };
+        })
+        .catch(function(e) {
+           console.log(e.name + ": " + e.message);
+        });
+     }
+    
+
+     var tmout=setInterval(function(){
+        var normal =parseInt(sessionStorage.getItem("window"));
+        if (window.innerWidth>=window.outerWidth&&window.innerWidth>=normal) {
+            
+   
+    }
+    else {
+        document.title = "you are minimuzed your window ";
+        document.querySelector('#cheat').innerHTML="you are minimuzed your window. for this reason you are lost your exam.we are sorry!"+normal+"inner"+window.innerWidth;
+ document.querySelector('#exam').style.display="none";
+    //showResults(questions, quizContainer, resultsContainer);
+      
+    
+    }
+    },1000);
+    
+     
+    
+      document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === 'visible') {
+      document.title = "you are live state now";
+       document.querySelector('#cheat').innerHTML="you are live state now";
+      } else {
+       document.title = "you are try to cheat exam we are sorry";
+        document.querySelector('#cheat').innerHTML="you are try to open new tab. for this reason you are lost your exam.we are sorry!";
+      
+       document.querySelector('#exam').style.display="none";
+      }
+    });
+    
+      window.addEventListener("blur", () => {
+        document.title = "you are try to cheat exam we are sorry";
+        document.querySelector('#cheat').innerHTML="you are try to open other software. for this reason you are lost your exam.we are sorry!";
+        document.querySelector('#exam').style.display="none";
+    
+       
+        
+    
+    });
+
+    $(document).ready(function () {
+
+
+        //$('#get').on('click', function () {
+ 
+        var dxa= setInterval(function () {
+         var postData = {csrfmiddlewaretoken: '{{ csrf_token }}' }
+             $.ajax({
+                 url: "",
+                 type: "POST",
+                 dataType: 'json',
+                 data: {
+ 
+                 },
+                 success: function (response) {
+                     
+                     sessionStorage.setItem("dat",response.dat)
+                     sessionStorage.setItem("tim",response.tim)
+                     sessionStorage.setItem("dur",response.dur)
+                     
+                 }
+ 
+             });
+             }, 1000);
+        // })
+     })
+
+    
+    function alarm(dy,tim){
+    var dy=sessionStorage.getItem("dat");
+    var tim=sessionStorage.getItem("tim");
+    var dur=sessionStorage.getItem("dur");
+    
+    
+    var t=new Date();
+    var hr=t.getHours()
+     var hn=t.getHours() < 10 ? '0'+hr : hr;
+    var min=t.getMinutes()
+    var mn=t.getMinutes() < 10 ? '0'+min : min;
+    var d=t.getDate();
+    var dba=t.getDate() < 10 ? '0'+d : d;
+    var y=t.getFullYear()
+    var mbr=t.getMonth()+1;
+    var mo=t.getMonth() < 10 ? '0'+mbr : mbr;
+    var day=y+"-"+mo+"-"+dba;
+    var h=hn+":"+mn;
+   
+    if(day==dy&&h==tim){
+    
+      sessionStorage.setItem("dure",dur);
+       document.getElementById('exam').style.display="block";
+    document.getElementById('pro').style.display="none";
+   
+    
+    
+    clearInterval(dx);
+   clearInterval(dxa);
+   window.location.reload()
+    }else{
+      document.querySelector('#cheat').innerHTML="wait few minutes";
+    }
+}
+
+var dx=setInterval(function(){
+      alarm();
+     
+    },1000); 
+    
+
+
+  var jk=sessionStorage.getItem("dure")
+    var t=jk!=null ? parseInt(jk)*60000+120000:3400000;
+    var g=setInterval(function(){
+      
+    var ghb=parseInt(t/3600000);
+    //console.log(ghb)
+     localStorage.setItem('gh',ghb);
+    
+      },100);
+     
+     
+      var mex=setInterval(function(){
+     var gmn=parseInt((t%3600000)/60000);
+     //console.log(gmn)
+     localStorage.setItem("gm",gmn);
+    
+     },100)
+     var gm;
+     var gh;
+     setInterval(function(){
+    var gma=localStorage.getItem("gm");
+    var gha=localStorage.getItem('gh');
+    gm=gma
+    gh=gha
+    },1000)
+     
+    
+     
+     
+      var sec=setInterval(function(){
+    
+     var dt=new Date();
+     var sec=dt.getSeconds();
+     var hr=dt.getHours()
+     
+     
+    document.querySelector('#sec').innerHTML=":"+sec;
+         
+      },1000);
+      
+    var min= setInterval(function() {
+      
+        var dt = new Date();
+        var sec = dt.getSeconds();
+        gm-= 1;
+        document.querySelector('#min').innerHTML = ":"+gm;
+      clearInterval(m)
+      clearInterval(mex)
+    localStorage.setItem('gm',gm);
+    console.log(gm)
+      if(gh>0&&gm==0){
+        
+       localStorage.setItem("gh",gh-1);
+      localStorage.setItem("gm",59);
+      //window.location.reload()
+    
+      }else if(gh==0&&gm==0){
+    clearInterval(min);
+      }
+      }, 60000);
+    var hr = setInterval(function() {
+        gh-= 1;
+        document.querySelector('#hr').innerHTML =  gh;
+      localStorage.setItem('gh',gh);
+      clearInterval(g)
+      clearInterval(h)
+      if(gh==0){
+        clearInterval(hr);
+        localStorage.clear()
+      }
+      }, 3600000);
+      var m=setInterval(function(){
+    document.querySelector('#min').innerHTML =":" +gm;
+      
+        //console.log(gm)
+      },1000)
+    var h = setInterval(function() {
+        document.querySelector('#hr').innerHTML = gh;
+      
+      }, 1000)
+  
+var tma=setTimeout(function(){
+var tma=document.querySelector('#tma');
+tma.setAttribute("style","display:block;");
+
+},3000);
+
+   
+
+</script>
+
+  

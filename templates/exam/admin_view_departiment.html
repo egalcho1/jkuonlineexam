@@ -1,0 +1,255 @@
+{% extends 'exam/adminbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+  <style>
+    ul .li{
+        padding-left: 20px;
+        font-size: 30px;
+        color: white;
+    
+      }#qz{
+          border: 3px solid white;
+            background: -webkit-linear-gradient(top left,black,darkgray);
+            background: -linear-gradient(top left,black,darkgray);
+            background: -o-linear-gradient(top left,black,darkgray);
+            height: 100%;
+            
+        }#cont{
+           background: -webkit-linear-gradient(top left,black,darkgray);
+            background: -linear-gradient(top left,black,darkgray);
+            background: -o-linear-gradient(top left,black,darkgray);
+        }#rpo{
+           border: 3px solid white;
+            background: -webkit-linear-gradient(top left,black,darkgray);
+            background: -linear-gradient(top left,black,darkgray);
+            background: -o-linear-gradient(top left,black,darkgray);
+            height: 100%;
+        }
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        
+        /* Set a style for all buttons */
+        
+        .button {
+            background-color: #48d1cc;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #4682b4;
+        }
+        
+        /* Center the image and position
+        the close button */
+        
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+            position: relative;
+        }
+        
+        img.avatar {
+            width: 40%;
+            border-radius: 50%;
+        }
+        
+        .container {
+            padding: 16px;
+        }
+        
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+        
+        /* The Modal (background) */
+        
+        .modal {
+           display: none;
+           position: fixed;
+           z-index: 1;
+           left: 0;
+           top: 0;
+           width: 100%;
+           height: 100%;
+           overflow: auto;
+           background-color: rgb(0,0,0);
+           background-color: rgba(0,0,0,0.4);
+           padding-top: 60px;
+        }
+        
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        
+        /* The Close Button (x) */
+        
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: #000;
+            font-size: 35px;
+            font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: red;
+            cursor: pointer;
+        }
+        
+        /* Add Zoom Animation */ 
+        
+        .animate {
+         -webkit-animation: animatezoom 0.6s;
+         animation: animatezoom 0.6s
+        }
+        
+        @-webkit-keyframes animatezoom {
+         from {-webkit-transform: scale(0)}
+         to {-webkit-transform: scale(1)}
+        }
+        
+        @keyframes animatezoom {
+            from {transform: scale(0)}
+            to {transform: scale(1)}
+        }
+        
+        /* Change styles for span and cancel
+        button on extra small screens */ 
+        
+        @media screen and(max-width: 300px){
+            span.psw {
+               display: block;
+               float: none;
+            }
+            .cancelbtn {
+               width: 100%;
+            }
+        }
+  </style>
+</head>
+<br><br>
+<div class="container">
+  <span onclick="document.querySelector('#id02').style.display='block'" class="btn btn-success" style="float:right"> add new</span>
+ 
+  <div class="panel panel-primary rounded-0">
+    <div class="panel-heading rounded-0">
+      <h6 class="panel-title">Courses</h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+
+          <th>departiment</th>
+          <th>collage</th>
+          <th>assign head</th>
+          <th>add course</th>
+          <th>add student</th>
+          <th>control live</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      {% for t in courses %}
+      <tr>
+
+        <td> {{t.name}}</td>
+        <td>{{t.cl_name}}</td>
+        
+        <td class="text-center"><a class="btn btn-success btn-xs" style="border-radius: 0%;" href="{% url 'exam:head' t.id  %}"><span class="fa fa-send"></span></a></td>
+        <td class="text-center"><a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'exam:admin-course' t.id  %}"><span class="fa fa-plus"></span></a></td>
+        <td class="text-center"><a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'exam:add_student_info' t.id  %}"><span class="fa fa-plus-circle"></span></a></td>
+        <td class="text-center"><a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'exam:livestreaming' t.id  %}"><span class="fa fa-video"></span></a></td>
+        
+        <td class="text-center"><a class="btn btn-danger btn-xs" style="border-radius: 0%;" href="{% url 'exam:delete-course' t.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+        
+    </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+<center>
+  <div id="id02" class="modal container-sm shadow" style="width: 720px;">
+  
+    <form class="modal-content animate" action="" id="form" name="my-form1" method="post" >
+  {%csrf_token%}
+        <div class="imgcontainer">
+  <span onclick="document.getElementById('id02').style.display='none'"class="close" title="Close Modal"> &times;</span>
+  
+  
+      </div>
+  
+  
+      <h1 class="btn btn-warning">departiment form </h1>
+      <div style="padding:20px;border:10px solid cyan">
+        <label class="form-label">select Collage</label>
+        <select name="cl" class="form-control">
+          {%for cl in colage%}
+          <option value="{{cl.id}}">{{cl.name}}</option>
+          {%endfor%}
+        </select>
+     <label class="form-label">enter name of departiment</label>
+     <input type="text" name="depart" id="mark" class="form-control" placeholder="example:computer science">
+    
+       
+     <label class="form-label">discription</label>
+     <textarea class="form-control" rows="4" id="question" name="descr" placeholder="example:computer scince is..."></textarea>
+     
+     
+     <button class="btn btn-success" type="submit">save</button></div>
+    </form>
+  </div></center>
+
+{% endblock content %}
